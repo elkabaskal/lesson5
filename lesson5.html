@@ -10,10 +10,12 @@
 </head>
 
 <body>
-    <style>
+    <!--     Первая верстка в HTML для понимания как визуально и в коде HTML должно выглядеть решение
+        
+        <style>
         td {
-            height: 20px;
-            width: 20px;
+            height: 50px;
+            width: 50px;
             border: 1px solid #000;
         }
         
@@ -127,7 +129,47 @@
                 <td class="num">1</td>
             </tr>
         </table>
-    </div>
+    </div>   Далее через JS -->
+
 </body>
+<script>
+    function createTable() {
+        let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        var number = 8;
+        var black = 1;
+        const myTable = document.createElement('table');
+        document.body.appendChild(myTable);
+
+        for (let i = 0; i < 8; i++) {
+            const colText = document.createElement('td');
+            myTable.appendChild(colText);
+            colText.textContent = alphabet[i];
+            colText.style.textAlign = 'center';
+        }
+
+        for (let i = 0; i < 8; i++) {
+            const row = document.createElement('tr');
+            myTable.appendChild(row);
+            row.insertAdjacentText("beforeend", number);
+            number--;
+            black++;
+
+
+            for (let i = 0; i < 8; i++) {
+
+                const col = document.createElement('td');
+                row.appendChild(col);
+                col.style.border = '1px solid #000';
+                col.style.width = '50px';
+                col.style.height = '50px';
+                if (black % 2 == 1) {
+                    col.style.backgroundColor = 'black';
+                }
+                black++;
+            }
+        }
+    }
+    createTable();
+</script>
 
 </html>
