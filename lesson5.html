@@ -6,51 +6,128 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lesson5</title>
-    <script src="script.js"></script>
+
 </head>
 
 <body>
+    <!-- //Task 1
+        <script>  
+        function createTable() {
+                let alphabet = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                var number = 8;
+                var black = 1;
+                const myTable = document.createElement('table');
+                document.body.appendChild(myTable);
 
-
-</body>
-<script>
-    function createTable() {
-        let alphabet = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-        var number = 8;
-        var black = 1;
-        const myTable = document.createElement('table');
-        document.body.appendChild(myTable);
-
-        for (let i = 0; i < 8; i++) {
-            const colText = document.createElement('td');
-            myTable.appendChild(colText);
-            colText.textContent = alphabet[i];
-            colText.style.textAlign = 'center';
-        }
-
-        for (let i = 0; i < 8; i++) {
-            const row = document.createElement('tr');
-            myTable.appendChild(row);
-            row.insertAdjacentText("beforeend", number);
-            number--;
-            black++;
-
-
-            for (let i = 0; i < 8; i++) {
-
-                const col = document.createElement('td');
-                row.appendChild(col);
-                col.style.border = '1px solid #000';
-                col.style.width = '50px';
-                col.style.height = '50px';
-                if (black % 2 == 1) {
-                    col.style.backgroundColor = 'black';
+                for (let i = 0; i < 8; i++) {
+                    const colText = document.createElement('td');
+                    myTable.appendChild(colText);
+                    colText.textContent = alphabet[i];
+                    colText.style.textAlign = 'center';
                 }
-                black++;
+
+                for (let i = 0; i < 8; i++) {
+                    const row = document.createElement('tr');
+                    myTable.appendChild(row);
+                    row.insertAdjacentText("beforeend", number);
+                    number--;
+                    black++;
+
+
+                    for (let i = 0; i < 8; i++) {
+
+                        const col = document.createElement('td');
+                        row.appendChild(col);
+                        col.style.border = '1px solid #000';
+                        col.style.width = '50px';
+                        col.style.height = '50px';
+                        if (black % 2 == 1) {
+                            col.style.backgroundColor = 'black';
+                        }
+                        black++;
+                    }
+                }
             }
+            createTable(); </script>-->
+
+    <style>
+        .good {
+            border: 3px solid #000;
+            background-color: aqua;
+            width: 30%;
         }
-    }
-    createTable();
-</script>
+    </style>
+
+    <div id='basket'></div>
+
+    <script>
+        //Task2 
+
+        const card = {
+            goods: [{
+                id: 1,
+                typeofgoods: 'for_man',
+                quantity: '0',
+                price: '200',
+            }, {
+                id: 2,
+                typeofgoods: 'for_kids',
+                quantity: '0',
+                price: '250',
+            }, {
+                id: 3,
+                typeofgoods: 'for_woman',
+                quantity: '0',
+                price: '150',
+            }, {
+                id: 4,
+                typeofgoods: 'for_pet',
+                quantity: '0',
+                price: '100',
+            }, ],
+
+
+            filCard() {
+                let sum = 0;
+                let amountAll = 0;
+                for (i = 0; i < card.goods.length; i++) {
+                    var amount = +prompt('Введите необходимое количество товара ' + card.goods[i].typeofgoods);
+                    if (isNaN(amount)) {
+                        alert('Введено неверное значение');
+                        //this.filCard()
+                    }
+                    card.goods[i].quantity = amount;
+                    let result = amount * card.goods[i].price;
+                    sum += result;
+                    amountAll += amount;
+                    if (amount !== 0) {
+                        this.initCardOfGoods();
+                    }
+
+                }
+                if (sum == 0) {
+                    document.write('Корзина пуста');
+                } else {
+                    document.write('В корзине ' + amountAll + ' товаров на сумму ' + sum + ' руб.');
+                }
+
+            },
+
+            initCardOfGoods() {
+                const basketBlock = document.getElementById('basket');
+                const cardGoods = document.createElement('div');
+                basketBlock.appendChild(cardGoods);
+                cardGoods.className = 'good';
+                cardGoods.insertAdjacentHTML("beforeend", '<p>Тип товара: ' + card.goods[i].typeofgoods + '</p>');
+                cardGoods.insertAdjacentHTML("beforeend", '<p>Количество выбраного товара в корзине: ' + card.goods[i].quantity + '</p>');
+                cardGoods.insertAdjacentHTML("beforeend", '<p>Цена товара: ' + card.goods[i].price + '</p>');
+                cardGoods.insertAdjacentHTML("beforeend", '<p>Стоимость выбранного товара: ' + card.goods[i].price * card.goods[i].quantity + '</p>');
+            },
+
+        }
+
+        card.filCard()
+    </script>
+</body>
 
 </html>
